@@ -1,11 +1,29 @@
 import * as React from 'react';
+import { useContext } from 'react';
+import Link from 'next/link';
+import { store } from '@/store/store';
 
-const Nav = () => (
-  <nav className="nav">
-    <div className="container">
-      <h4>Logo</h4>
-    </div>
-  </nav>
-);
+const Nav = () => {
+  const {
+    state: { cart },
+  } = useContext(store);
+
+  return (
+    <nav className="nav">
+      <div className="container">
+        <div className="nav-menus">
+          <Link href="/">
+            <h4>e-commerce</h4>
+          </Link>
+          <div className="menus">
+            <Link href="/cart">
+              <a className="button">🛍️ Cart ({cart?.products.length})</a>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+};
 
 export default Nav;

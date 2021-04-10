@@ -1,22 +1,22 @@
+import { store } from '@/store/store';
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 interface ISearch {
   handleFilter: ({ query, color }: { query: string; color: string }) => void;
-  colors: string[];
 }
 
-const Search: React.FC<ISearch> = ({ handleFilter, colors }) => {
+const Search: React.FC<ISearch> = ({ handleFilter }) => {
+  const {
+    state: { colors },
+  } = useContext(store);
+
   const [query, setQuery] = useState(``);
   const [color, setColor] = useState(``);
 
   useEffect(() => {
     handleFilter({ query, color });
-  }, [query]);
-
-  useEffect(() => {
-    handleFilter({ query, color });
-  }, [color]);
+  }, [query, color]);
 
   return (
     <div className="search-wrapper">
@@ -40,8 +40,9 @@ const Search: React.FC<ISearch> = ({ handleFilter, colors }) => {
             name="color"
             onChange={(e) => setColor(e.target.value)}
             id="search-color"
+            value={color}
           >
-            <option disabled selected value="null">
+            <option disabled value="">
               Filter by Color
             </option>
             {colors.map((c) => (

@@ -1,31 +1,24 @@
 import Head from 'next/head';
 import MainLayout from '@/layouts/MainLayout';
-import { useEffect, useState } from 'react';
-import { fetchProducts } from '@/services/product.service';
-import { IProduct } from '@/interfaces/product.interface';
+import { useContext, useEffect, useState } from 'react';
+
 import ProductCard from '@/components/ProductCard';
 import Search from '@/components/Search';
+import { store } from '@/store/store';
+import { IProduct } from '../interfaces/product.interface';
 
 export default function Home() {
-  // store original array.
-  const [originalProducts, setOriginalProducts] = useState([] as IProduct[]);
-  // store filtered
-  const [products, setProducts] = useState([] as IProduct[]);
-  const [colors, setColors] = useState([] as string[]);
+  const {
+    state: { products },
+  } = useContext(store);
+  const [localProducts, setLocalProducts] = useState([] as IProduct[]);
 
   useEffect(() => {
-    fetchProducts().then((res) => {
-      setProducts(res);
-      setOriginalProducts(res);
-      const productColors = res
-        .map((product) => product.color)
-        .filter((value, index, self) => self.indexOf(value) === index);
-      setColors(productColors);
-    });
-  }, []);
+    setLocalProducts(products);
+  }, [products]);
 
   const handleFilter = (query: string, color: string) => {
-    let result = [...originalProducts];
+    let result = [...products];
     if (query) {
       result = result.filter((product) =>
         product.name.toLowerCase().includes(query.toLowerCase()),
@@ -34,24 +27,21 @@ export default function Home() {
     if (color) {
       result = result.filter((product) => product.color === color);
     }
-    setProducts(result);
+    setLocalProducts(result);
   };
 
   return (
     <MainLayout>
       <Head>
-        <title>Create Next App</title>
+        <title>Cental e-commerce</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Search
-        handleFilter={({ query, color }) => handleFilter(query, color)}
-        colors={colors}
-      />
+      <Search handleFilter={({ query, color }) => handleFilter(query, color)} />
 
       <div className="product-wrapper">
-        {products.length > 0
-          ? products.map((product) => (
+        {localProducts.length > 0
+          ? localProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))
           : null}
