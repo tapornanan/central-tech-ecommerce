@@ -4,7 +4,7 @@ import Nav from '@/components/layouts/Nav';
 const MainLayout: React.FC = ({ children }) => (
   <>
     <Nav />
-    {children}
+    <div className="container">{children}</div>
   </>
 );
 
