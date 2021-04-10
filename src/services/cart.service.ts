@@ -47,4 +47,21 @@ const addToCart = (product: IProduct): ICart => {
   return saveCart(calculateTotal(cart));
 };
 
-export { getCart, saveCart, addToCart };
+const updateCartQuantity = (id: number, quantity: number): ICart => {
+  const cart = { ...getCart() };
+  const updateProduct = cart.products.find((p) => p.id === id);
+  if (updateProduct) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    updateProduct.quantity = quantity;
+  }
+  return saveCart(calculateTotal(cart));
+};
+
+const removeCartItem = (id: number): ICart => {
+  const cart = { ...getCart() };
+  const newProducts = cart.products.filter((p) => p.id !== id);
+  cart.products = newProducts;
+  return saveCart(calculateTotal(cart));
+};
+
+export { getCart, saveCart, addToCart, updateCartQuantity, removeCartItem };

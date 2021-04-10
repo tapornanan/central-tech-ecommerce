@@ -22,7 +22,7 @@ const ProductCard: React.FC<IProductCard> = ({ product }) => {
       <div className="product-color">{product.color}</div>
       <div className="product-price">฿{product.price}</div>
       <button
-        className="button primary block"
+        className="button primary block product-button"
         type="button"
         onClick={() => handleAddProduct(product)}
       >

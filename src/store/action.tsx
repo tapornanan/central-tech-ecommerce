@@ -7,6 +7,10 @@ export enum ActionType {
   AddToCart = `ADD_TO_CART`,
   SetProducts = `SET_PRODUCTS`,
   SetColors = `SET_COLORS`,
+  OpenEditCart = `OPEN_EDIT_CART`,
+  CloseEditCart = `CLOSE_EDIT_CART`,
+  UpdateCartQuantity = `UPDATE_CART_QUANTITY`,
+  RemoveCartItem = `REMOVE_CART_ITEM`,
 }
 
 interface ISetCart {
@@ -29,7 +33,39 @@ interface ISetProducts {
   payload: IProduct[];
 }
 
-export type Actions = IAddToCart | ISetProducts | ISetCart | ISetColors;
+interface IOpenEditCart {
+  type: ActionType.OpenEditCart;
+  payload: IProduct;
+}
+
+interface ICloseEditCart {
+  type: ActionType.CloseEditCart;
+}
+
+interface IUpdateCartQuantity {
+  type: ActionType.UpdateCartQuantity;
+  payload: {
+    id: number;
+    quantity: number;
+  };
+}
+
+interface IRemoveCartItem {
+  type: ActionType.RemoveCartItem;
+  payload: {
+    id: number;
+  };
+}
+
+export type Actions =
+  | IAddToCart
+  | ISetProducts
+  | ISetCart
+  | ISetColors
+  | IOpenEditCart
+  | ICloseEditCart
+  | IUpdateCartQuantity
+  | IRemoveCartItem;
 
 export const SetCart = (cart: ICart) => ({
   type: ActionType.SetCart,
@@ -49,4 +85,34 @@ export const AddToCart = (product: IProduct) => ({
 export const SetProducts = (products: IProduct[]) => ({
   type: ActionType.SetProducts,
   payload: products,
+});
+
+export const OpenEditCart = (product: IProduct) => ({
+  type: ActionType.OpenEditCart,
+  payload: product,
+});
+
+export const CloseEditCart = () => ({
+  type: ActionType.CloseEditCart,
+});
+
+export const UpdateCartQuantity = ({
+  id,
+  quantity,
+}: {
+  id: number;
+  quantity: number;
+}) => ({
+  type: ActionType.UpdateCartQuantity,
+  payload: {
+    id,
+    quantity,
+  },
+});
+
+export const RemoveCartItem = (id: number) => ({
+  type: ActionType.RemoveCartItem,
+  payload: {
+    id,
+  },
 });

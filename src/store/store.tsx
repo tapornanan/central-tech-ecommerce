@@ -1,4 +1,9 @@
-import { addToCart, getCart } from '@/services/cart.service';
+import {
+  addToCart,
+  getCart,
+  removeCartItem,
+  updateCartQuantity,
+} from '@/services/cart.service';
 import React, { createContext, useReducer, useEffect } from 'react';
 
 import { fetchProducts } from '@/services/product.service';
@@ -10,6 +15,8 @@ interface IStoreState {
   cart: ICart | null;
   products: IProduct[];
   colors: string[];
+  isEditCart: boolean;
+  cartDetail: IProduct | null;
 }
 
 interface IAppContext {
@@ -21,6 +28,8 @@ const initialState: IStoreState = {
   cart: null,
   products: [],
   colors: [],
+  isEditCart: false,
+  cartDetail: null,
 };
 
 export const store = createContext<IAppContext>({
@@ -49,6 +58,28 @@ const reducer = (state: IStoreState, action: Actions) => {
       return {
         ...state,
         products: action.payload,
+      };
+    case ActionType.OpenEditCart:
+      return {
+        ...state,
+        isEditCart: true,
+        cartDetail: action.payload,
+      };
+    case ActionType.CloseEditCart:
+      return {
+        ...state,
+        isEditCart: false,
+        cartDetail: null,
+      };
+    case ActionType.UpdateCartQuantity:
+      return {
+        ...state,
+        cart: updateCartQuantity(action.payload.id, action.payload.quantity),
+      };
+    case ActionType.RemoveCartItem:
+      return {
+        ...state,
+        cart: removeCartItem(action.payload.id),
       };
     default:
       return state;
