@@ -1,4 +1,5 @@
 import { store } from '@/store/store';
+import { numberFormat } from '@/utils/number-format';
 import React, { useContext } from 'react';
 import { IProduct } from '../interfaces/product.interface';
 import { AddToCart } from '../store/action';
@@ -20,7 +21,7 @@ const ProductCard: React.FC<IProductCard> = ({ product }) => {
       <h4 className="product-name">{product.name}</h4>
       <div className="product-department">{product.department}</div>
       <div className="product-color">{product.color}</div>
-      <div className="product-price">฿{product.price}</div>
+      <div className="product-price">{numberFormat(product.price)}</div>
       <button
         className="button primary block product-button"
         type="button"

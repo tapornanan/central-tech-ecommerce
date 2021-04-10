@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 
 import { store } from '@/store/store';
-import { IProduct } from '@/interfaces/product.interface';
 import { CloseEditCart, UpdateCartQuantity } from '../store/action';
 
 const ProductEditModal = () => {

@@ -5,6 +5,7 @@ import { store } from '@/store/store';
 import Link from 'next/link';
 import ProductEditModal from '@/components/ProductEditModal';
 import { IProduct } from '@/interfaces/product.interface';
+import { numberFormat } from '@/utils/number-format';
 import { OpenEditCart, RemoveCartItem } from '../store/action';
 
 const Cart = () => {
@@ -48,6 +49,15 @@ const Cart = () => {
             </tr>
           </thead>
           <tbody>
+            {cart?.products.length === 0 ? (
+              <tr>
+                <td colSpan={7}>
+                  <p className="text-center">
+                    You have no product in shopping cart.
+                  </p>
+                </td>
+              </tr>
+            ) : null}
             {cart?.products.map((product, index) => (
               <tr key={product.id}>
                 <td className="text-center">{index + 1}</td>
@@ -56,11 +66,13 @@ const Cart = () => {
                 </th>
                 <td>
                   <strong>{product.name}</strong>
+                  <br />
+                  <span className="text-italic">{product.color}</span>
                 </td>
                 <td className="text-center">{product.quantity}</td>
-                <td className="text-right">{product.price}</td>
+                <td className="text-right">{numberFormat(product.price)}</td>
                 <td className="text-right">
-                  {(product.quantity || 0) * product.price}
+                  {numberFormat((product.quantity || 0) * product.price)}
                 </td>
                 <td className="text-right">
                   <button
@@ -87,7 +99,7 @@ const Cart = () => {
                 Total Tax
               </td>
               <td colSpan={3} className="text-right">
-                {cart?.tax.toFixed(2)}
+                {numberFormat(cart?.tax || 0)}
               </td>
             </tr>
             <tr>
@@ -95,7 +107,7 @@ const Cart = () => {
                 Total Price Incl.
               </td>
               <td colSpan={3} className="text-right">
-                {cart?.total.toFixed(2)}
+                {numberFormat(cart?.total || 0)}
               </td>
             </tr>
           </tfoot>
@@ -103,7 +115,7 @@ const Cart = () => {
       </div>
       <div className="text-right">
         <Link href="/checkout">
-          <button className="button primary" type="button">
+          <button className="button primary checkout" type="button">
             Checkout
           </button>
         </Link>

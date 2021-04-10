@@ -97,6 +97,16 @@ body {
     }
   }
 
+  &.success {
+    background: $green;
+    color: $white;
+
+    &:hover {
+      background: darken($green, 10%);
+      color: $white;
+    }
+  }
+
   &.block {
     width: 100%;
   }
@@ -302,6 +312,9 @@ body {
       .quantity-input {
         text-align: center;
       }
+
+      .button {
+      }
     }
   }
 }
@@ -310,4 +323,9 @@ body {
   .product-image {
     max-width: 80px;
   }
+}
+
+.checkout {
+  height: 50px;
+  padding: 12px 30px;
 }
