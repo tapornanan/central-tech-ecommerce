@@ -23,7 +23,7 @@ const ProductCard: React.FC<IProductCard> = ({ product }) => {
   return (
     <div className="product-card">
       <div className="product-image">
-        <img src={product.image} alt={product.name} />
+        <img src={`${product.image}?fake=${product.name}`} alt={product.name} />
       </div>
       <h4 className="product-name">{product.name}</h4>
       <div className="product-department">{product.department}</div>

@@ -71,7 +71,11 @@ const Cart = () => {
                 <tr key={product.id}>
                   <td className="text-center">{index + 1}</td>
                   <th>
-                    <img className="product-image" src={product.image} alt="" />
+                    <img
+                      className="product-image"
+                      src={`${product.image}?fake=${product.name}`}
+                      alt={product.name}
+                    />
                   </th>
                   <td>
                     <strong>{product.name}</strong>
