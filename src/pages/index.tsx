@@ -30,7 +30,7 @@ export default function Home() {
     if (size) {
       const [begin, end] = size.split(`-`);
       result = result.filter(
-        (product) => product.size < +end && product.size > +begin,
+        (product) => product.size <= +end && product.size >= +begin,
       );
     }
     setLocalProducts(result);
