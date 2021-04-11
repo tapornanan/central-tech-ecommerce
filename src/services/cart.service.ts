@@ -64,4 +64,16 @@ const removeCartItem = (id: number): ICart => {
   return saveCart(calculateTotal(cart));
 };
 
-export { getCart, saveCart, addToCart, updateCartQuantity, removeCartItem };
+const clearCart = (): ICart => {
+  saveCart(defaultCart);
+  return defaultCart;
+};
+
+export {
+  getCart,
+  saveCart,
+  addToCart,
+  updateCartQuantity,
+  removeCartItem,
+  clearCart,
+};

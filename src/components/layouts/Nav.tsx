@@ -10,10 +10,10 @@ const Nav = () => {
 
   return (
     <nav className="nav">
-      <div className="container">
+      <div className="container w-100">
         <div className="nav-menus">
           <Link href="/">
-            <h4>e-commerce</h4>
+            <h4 className="logo">🏪 e-commerce</h4>
           </Link>
           <div className="menus">
             <Link href="/cart">

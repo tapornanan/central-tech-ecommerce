@@ -1,9 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 
 import { store } from '@/store/store';
+import { useToasts } from 'react-toast-notifications';
 import { CloseEditCart, UpdateCartQuantity } from '../store/action';
 
 const ProductEditModal = () => {
+  const { addToast } = useToasts();
   const {
     state: { cartDetail, isEditCart },
     dispatch,
@@ -33,6 +35,9 @@ const ProductEditModal = () => {
         UpdateCartQuantity({ id: cartDetail.id, quantity: newQuantity }) as any,
       );
       handleCloseEditCart();
+      addToast(`Update ${cartDetail?.name} to quantity: ${newQuantity}`, {
+        appearance: `success`,
+      });
     }
   };
 
@@ -48,7 +53,6 @@ const ProductEditModal = () => {
             >
               ❌
             </button>
-            <img src={cartDetail?.image} alt={cartDetail?.name} />
             <h4 className="product-name text-center">{cartDetail?.name}</h4>
             <div className="quantity-modifier-wrapper">
               <button
@@ -60,7 +64,7 @@ const ProductEditModal = () => {
               </button>
               <input
                 type="number"
-                className="quantity-input"
+                className="quantity-input input"
                 value={newQuantity}
                 min={1}
                 onChange={(e) => setNewQuantity(+e.target.value)}

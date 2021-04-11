@@ -11,6 +11,7 @@ export enum ActionType {
   CloseEditCart = `CLOSE_EDIT_CART`,
   UpdateCartQuantity = `UPDATE_CART_QUANTITY`,
   RemoveCartItem = `REMOVE_CART_ITEM`,
+  ClearShoppingCart = `CLEAR_SHOPPING_CART`,
 }
 
 interface ISetCart {
@@ -57,6 +58,10 @@ interface IRemoveCartItem {
   };
 }
 
+interface IClearShoppingCart {
+  type: ActionType.ClearShoppingCart;
+}
+
 export type Actions =
   | IAddToCart
   | ISetProducts
@@ -65,7 +70,8 @@ export type Actions =
   | IOpenEditCart
   | ICloseEditCart
   | IUpdateCartQuantity
-  | IRemoveCartItem;
+  | IRemoveCartItem
+  | IClearShoppingCart;
 
 export const SetCart = (cart: ICart) => ({
   type: ActionType.SetCart,
@@ -115,4 +121,8 @@ export const RemoveCartItem = (id: number) => ({
   payload: {
     id,
   },
+});
+
+export const ClearShoppingCart = () => ({
+  type: ActionType.ClearShoppingCart,
 });

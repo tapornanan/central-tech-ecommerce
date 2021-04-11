@@ -1,5 +1,6 @@
 import {
   addToCart,
+  clearCart,
   getCart,
   removeCartItem,
   updateCartQuantity,
@@ -81,12 +82,17 @@ const reducer = (state: IStoreState, action: Actions) => {
         ...state,
         cart: removeCartItem(action.payload.id),
       };
+    case ActionType.ClearShoppingCart:
+      return {
+        ...state,
+        cart: clearCart(),
+      };
     default:
       return state;
   }
 };
 
-export const StoreProvider = ({ children }: { children: JSX.Element }) => {
+export const StoreProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {

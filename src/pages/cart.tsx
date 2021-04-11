@@ -6,7 +6,11 @@ import Link from 'next/link';
 import ProductEditModal from '@/components/ProductEditModal';
 import { IProduct } from '@/interfaces/product.interface';
 import { numberFormat } from '@/utils/number-format';
-import { OpenEditCart, RemoveCartItem } from '../store/action';
+import {
+  OpenEditCart,
+  RemoveCartItem,
+  ClearShoppingCart,
+} from '../store/action';
 
 const Cart = () => {
   const {
@@ -29,6 +33,10 @@ const Cart = () => {
     }
   };
 
+  const handleCheckout = () => {
+    dispatch(ClearShoppingCart() as any);
+  };
+
   return (
     <MainLayout>
       <Head>
@@ -36,86 +44,92 @@ const Cart = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="card">
-        <table className="table cart">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Image</th>
-              <th className="text-left">Product name</th>
-              <th>@Qty</th>
-              <th className="text-right">Item price</th>
-              <th className="text-right">Total price</th>
-              <th className="text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cart?.products.length === 0 ? (
+        <div className="table-responsive">
+          <table className="table cart">
+            <thead>
               <tr>
-                <td colSpan={7}>
-                  <p className="text-center">
-                    You have no product in shopping cart.
-                  </p>
+                <th>#</th>
+                <th>Image</th>
+                <th className="text-left">Product name</th>
+                <th>@Qty</th>
+                <th className="text-right">Item price</th>
+                <th className="text-right">Total price</th>
+                <th className="text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cart?.products.length === 0 ? (
+                <tr>
+                  <td colSpan={7}>
+                    <p className="text-center">
+                      You have no product in shopping cart.
+                    </p>
+                  </td>
+                </tr>
+              ) : null}
+              {cart?.products.map((product, index) => (
+                <tr key={product.id}>
+                  <td className="text-center">{index + 1}</td>
+                  <th>
+                    <img className="product-image" src={product.image} alt="" />
+                  </th>
+                  <td>
+                    <strong>{product.name}</strong>
+                    <br />
+                    <span className="text-italic">{product.color}</span>
+                  </td>
+                  <td className="text-center">{product.quantity}</td>
+                  <td className="text-right">{numberFormat(product.price)}</td>
+                  <td className="text-right">
+                    {numberFormat((product.quantity || 0) * product.price)}
+                  </td>
+                  <td className="text-right">
+                    <button
+                      className="button warning"
+                      type="button"
+                      onClick={() => handleEditCart(product)}
+                    >
+                      ✏️
+                    </button>
+                    <button
+                      className="button danger"
+                      type="button"
+                      onClick={() => handleRemoveItem(product)}
+                    >
+                      🗑️
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colSpan={4} className="text-right">
+                  Total Tax
+                </td>
+                <td colSpan={3} className="text-right">
+                  {numberFormat(cart?.tax || 0)}
                 </td>
               </tr>
-            ) : null}
-            {cart?.products.map((product, index) => (
-              <tr key={product.id}>
-                <td className="text-center">{index + 1}</td>
-                <th>
-                  <img className="product-image" src={product.image} alt="" />
-                </th>
-                <td>
-                  <strong>{product.name}</strong>
-                  <br />
-                  <span className="text-italic">{product.color}</span>
+              <tr>
+                <td colSpan={4} className="text-right">
+                  Total Price Incl.
                 </td>
-                <td className="text-center">{product.quantity}</td>
-                <td className="text-right">{numberFormat(product.price)}</td>
-                <td className="text-right">
-                  {numberFormat((product.quantity || 0) * product.price)}
-                </td>
-                <td className="text-right">
-                  <button
-                    className="button warning"
-                    type="button"
-                    onClick={() => handleEditCart(product)}
-                  >
-                    ✏️
-                  </button>
-                  <button
-                    className="button danger"
-                    type="button"
-                    onClick={() => handleRemoveItem(product)}
-                  >
-                    🗑️
-                  </button>
+                <td colSpan={3} className="text-right">
+                  {numberFormat(cart?.total || 0)}
                 </td>
               </tr>
-            ))}
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colSpan={4} className="text-right">
-                Total Tax
-              </td>
-              <td colSpan={3} className="text-right">
-                {numberFormat(cart?.tax || 0)}
-              </td>
-            </tr>
-            <tr>
-              <td colSpan={4} className="text-right">
-                Total Price Incl.
-              </td>
-              <td colSpan={3} className="text-right">
-                {numberFormat(cart?.total || 0)}
-              </td>
-            </tr>
-          </tfoot>
-        </table>
+            </tfoot>
+          </table>
+        </div>
       </div>
       <div className="text-right">
-        <Link href="/checkout">
-          <button className="button primary checkout" type="button">
+        <Link href="/thankyou">
+          <button
+            className="button primary checkout"
+            onClick={handleCheckout}
+            type="button"
+          >
             Checkout
           </button>
         </Link>

@@ -22,19 +22,17 @@ const Search: React.FC<ISearch> = ({ handleFilter }) => {
     <div className="search-wrapper">
       <div className="form">
         <label htmlFor="search-input" className="label">
-          Search product
           <input
             type="text"
             name="query"
             className="input"
             id="search-input"
-            placeholder="Keyword..."
+            placeholder="Search product name"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
         </label>
         <label htmlFor="search-color" className="label">
-          Filter by product color
           <select
             className="select"
             name="color"
@@ -42,9 +40,7 @@ const Search: React.FC<ISearch> = ({ handleFilter }) => {
             id="search-color"
             value={color}
           >
-            <option disabled value="">
-              Filter by Color
-            </option>
+            <option value="">All Colors</option>
             {colors.map((c) => (
               <option key={c} value={c}>
                 {c}
