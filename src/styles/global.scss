@@ -59,10 +59,11 @@ body {
 .input {
   box-shadow: 0 5px 20px -5px rgb(0 0 0 / 7%);
   outline: none;
-  height: 35px;
+  height: 45px;
   border: 1px solid $light-grey;
   border-radius: 4px;
   padding: 4px 12px;
+  box-sizing: border-box;
 }
 
 .select {
@@ -72,6 +73,7 @@ body {
   border: 1px solid $light-grey;
   border-radius: 4px;
   padding: 4px 12px;
+  box-sizing: border-box;
 }
 
 .button {
@@ -264,6 +266,25 @@ body {
 .form {
   display: flex;
   justify-content: space-around;
+  @media (max-width: 767px) {
+    flex-direction: column;
+    width: 100%;
+    .label {
+      margin-bottom: 20px;
+    }
+
+    .input {
+      width: 100%;
+    }
+
+    .select {
+      width: 100%;
+    }
+
+    .mr-2 {
+      margin-right: 0;
+    }
+  }
 }
 
 .nav-menus {
