@@ -1,6 +1,5 @@
-import { store } from '@/store/store';
-import * as React from 'react';
-import { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { store } from '../store/store';
 
 interface ISearch {
   handleFilter: ({
