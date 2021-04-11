@@ -40,7 +40,7 @@ const Cart = () => {
   return (
     <MainLayout>
       <Head>
-        <title>Cental e-commerce | Cart</title>
+        <title>Central e-commerce | Cart</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="card">

@@ -39,7 +39,7 @@ export default function Home() {
   return (
     <MainLayout>
       <Head>
-        <title>Cental e-commerce</title>
+        <title>Central e-commerce</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
