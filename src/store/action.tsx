@@ -1,4 +1,4 @@
-import { IProduct } from '@/interfaces/product.interface';
+import { IProduct } from '../interfaces/product.interface';
 import { ICart } from '../interfaces/cart.interface';
 
 // eslint-disable-next-line no-shadow

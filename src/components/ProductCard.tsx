@@ -1,7 +1,7 @@
-import { store } from '@/store/store';
-import { numberFormat } from '@/utils/number-format';
 import React, { useContext } from 'react';
 import { useToasts } from 'react-toast-notifications';
+import { numberFormat } from '../utils/number-format';
+import { store } from '../store/store';
 import { IProduct } from '../interfaces/product.interface';
 import { AddToCart } from '../store/action';
 

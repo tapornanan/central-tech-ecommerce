@@ -1,13 +1,13 @@
+import React, { createContext, useReducer, useEffect } from 'react';
+
+import { fetchProducts } from '../services/product.service';
 import {
   addToCart,
   clearCart,
   getCart,
   removeCartItem,
   updateCartQuantity,
-} from '@/services/cart.service';
-import React, { createContext, useReducer, useEffect } from 'react';
-
-import { fetchProducts } from '@/services/product.service';
+} from '../services/cart.service';
 import { ICart } from '../interfaces/cart.interface';
 import { IProduct } from '../interfaces/product.interface';
 import { Actions, ActionType, SetCart, SetColors, SetProducts } from './action';
