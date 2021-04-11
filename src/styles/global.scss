@@ -63,7 +63,6 @@ body {
   border: 1px solid $light-grey;
   border-radius: 4px;
   padding: 4px 12px;
-  margin-right: 20px;
 }
 
 .select {
@@ -165,10 +164,11 @@ body {
     'image'
     'name'
     'department'
+    'size'
     'color'
     'price'
     'button';
-  grid-template-rows: 180px 50px 20px 20px 30px 40px;
+  grid-template-rows: 180px 50px 22px 22px 40px 30px 40px;
   grid-template-columns: auto;
   transition: 0.3s;
 
@@ -199,7 +199,8 @@ body {
   }
 
   .product-department,
-  .product-color {
+  .product-color,
+  .product-size {
     margin-bottom: 10px;
     color: $grey;
     font-size: 14px;
@@ -207,10 +208,21 @@ body {
 
   .product-color {
     grid-area: color;
+    min-width: 50px;
+    max-width: 80px;
+    padding: 8px 12px;
+    border-radius: 30px;
+    color: $black;
+    text-align: center;
+    box-shadow: 0 3px 8px 0 rgb(0 0 0 / 6%);
   }
 
   .product-department {
     grid-area: department;
+  }
+
+  .product-size {
+    grid-area: size;
   }
 
   .product-price {
@@ -229,6 +241,10 @@ body {
   margin-top: 80px;
 }
 
+.mr-2 {
+  margin-right: 20px;
+}
+
 .search-wrapper {
   margin-bottom: 20px;
   display: flex;
@@ -243,9 +259,6 @@ body {
     justify-content: center;
     padding: 20px;
   }
-}
-
-#search-input {
 }
 
 .form {

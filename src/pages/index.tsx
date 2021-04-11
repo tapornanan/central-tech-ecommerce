@@ -17,7 +17,7 @@ export default function Home() {
     setLocalProducts(products);
   }, [products]);
 
-  const handleFilter = (query: string, color: string) => {
+  const handleFilter = (query: string, color: string, size: string) => {
     let result = [...products];
     if (query) {
       result = result.filter((product) =>
@@ -26,6 +26,12 @@ export default function Home() {
     }
     if (color) {
       result = result.filter((product) => product.color === color);
+    }
+    if (size) {
+      const [begin, end] = size.split(`-`);
+      result = result.filter(
+        (product) => product.size < +end && product.size > +begin,
+      );
     }
     setLocalProducts(result);
   };
@@ -37,7 +43,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Search handleFilter={({ query, color }) => handleFilter(query, color)} />
+      <Search
+        handleFilter={({ query, color, size }) =>
+          handleFilter(query, color, size)
+        }
+      />
 
       <div className="product-wrapper">
         {localProducts.length > 0

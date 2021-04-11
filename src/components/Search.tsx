@@ -3,25 +3,35 @@ import * as React from 'react';
 import { useState, useEffect, useContext } from 'react';
 
 interface ISearch {
-  handleFilter: ({ query, color }: { query: string; color: string }) => void;
+  handleFilter: ({
+    query,
+    color,
+    size,
+  }: {
+    query: string;
+    color: string;
+    size: string;
+  }) => void;
 }
 
 const Search: React.FC<ISearch> = ({ handleFilter }) => {
   const {
     state: { colors },
   } = useContext(store);
+  const sizes = [`0 - 25`, `26 - 50`, `51 - 75`];
 
   const [query, setQuery] = useState(``);
   const [color, setColor] = useState(``);
+  const [size, setSize] = useState(``);
 
   useEffect(() => {
-    handleFilter({ query, color });
-  }, [query, color]);
+    handleFilter({ query, color, size });
+  }, [query, color, size]);
 
   return (
     <div className="search-wrapper">
       <div className="form">
-        <label htmlFor="search-input" className="label">
+        <label htmlFor="search-input" className="label mr-2">
           <input
             type="text"
             name="query"
@@ -32,7 +42,7 @@ const Search: React.FC<ISearch> = ({ handleFilter }) => {
             onChange={(e) => setQuery(e.target.value)}
           />
         </label>
-        <label htmlFor="search-color" className="label">
+        <label htmlFor="search-color" className="label mr-2">
           <select
             className="select"
             name="color"
@@ -45,6 +55,20 @@ const Search: React.FC<ISearch> = ({ handleFilter }) => {
               <option key={c} value={c}>
                 {c}
               </option>
+            ))}
+          </select>
+        </label>
+        <label htmlFor="search-size" className="label">
+          <select
+            className="select"
+            name="size"
+            onChange={(e) => setSize(e.target.value)}
+            value={size}
+            id="search-size"
+          >
+            <option value="">All Sizes</option>
+            {sizes.map((s) => (
+              <option value={s}>{s}</option>
             ))}
           </select>
         </label>

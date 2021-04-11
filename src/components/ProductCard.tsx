@@ -27,7 +27,10 @@ const ProductCard: React.FC<IProductCard> = ({ product }) => {
       </div>
       <h4 className="product-name">{product.name}</h4>
       <div className="product-department">{product.department}</div>
-      <div className="product-color">{product.color}</div>
+      <div className="product-size">{product.size}ml</div>
+      <div className="product-color" style={{ backgroundColor: product.color }}>
+        {product.color}
+      </div>
       <div className="product-price">{numberFormat(product.price)}</div>
       <button
         className="button primary block product-button"
