@@ -64,10 +64,7 @@ const removeCartItem = (id: number): ICart => {
   return saveCart(calculateTotal(cart));
 };
 
-const clearCart = (): ICart => {
-  saveCart(defaultCart);
-  return defaultCart;
-};
+const clearCart = (): ICart => saveCart(defaultCart);
 
 export {
   getCart,

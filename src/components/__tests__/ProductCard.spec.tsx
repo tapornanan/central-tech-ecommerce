@@ -3,7 +3,7 @@ import { shallow, ShallowWrapper } from 'enzyme';
 import ProductCard from '../ProductCard';
 import { IProduct } from '../../interfaces/product.interface';
 
-const mockToast = jest.mock(`react-toast-notifications`, () => ({
+jest.mock(`react-toast-notifications`, () => ({
   useToasts: jest.fn(() => ({
     addToast: jest.fn(),
   })),
