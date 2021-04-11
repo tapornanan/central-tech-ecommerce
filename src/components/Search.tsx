@@ -68,7 +68,9 @@ const Search: React.FC<ISearch> = ({ handleFilter }) => {
           >
             <option value="">All Sizes</option>
             {sizes.map((s) => (
-              <option value={s}>{s}</option>
+              <option key={s} value={s}>
+                {s}
+              </option>
             ))}
           </select>
         </label>

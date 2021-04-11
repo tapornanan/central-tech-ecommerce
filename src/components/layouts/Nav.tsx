@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import Link from 'next/link';
 import { store } from '@/store/store';
 
-const Nav = () => {
+const Nav: React.FC = () => {
   const {
     state: { cart },
   } = useContext(store);

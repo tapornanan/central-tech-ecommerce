@@ -4,7 +4,7 @@ import { store } from '@/store/store';
 import { useToasts } from 'react-toast-notifications';
 import { CloseEditCart, UpdateCartQuantity } from '../store/action';
 
-const ProductEditModal = () => {
+const ProductEditModal: React.FC = () => {
   const { addToast } = useToasts();
   const {
     state: { cartDetail, isEditCart },
