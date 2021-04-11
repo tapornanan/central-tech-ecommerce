@@ -129,6 +129,7 @@ const Cart = () => {
             className="button primary checkout"
             onClick={handleCheckout}
             type="button"
+            disabled={cart?.products.length === 0}
           >
             Checkout
           </button>

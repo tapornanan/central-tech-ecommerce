@@ -426,6 +426,10 @@ body {
 .checkout {
   height: 50px;
   padding: 12px 30px;
+
+  &[disabled] {
+    opacity: 0.6;
+  }
 }
 
 .thankyou-wrapper {
